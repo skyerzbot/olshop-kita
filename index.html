@@ -244,16 +244,22 @@ fetchProducts();
     renderProducts();
     renderCart();
   </script>
-  <!-- Load Supabase -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
+    </footer>
+
+  <!-- Load Supabase yang baru dipaste -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const supabaseUrl = '...';
+    // ... sisa kode koneksi ...
+  </script>
+
+  <!-- Script utama website -->
+  <script>
+  // Variabel untuk menyimpan data dari Supabase
+  let products = [];
+  // ...
+    
   
-  const supabaseUrl = 'https://ztpodvtqggdjxkkzupax.supabase.co';
-  const supabaseKey = 'sb_publishable_wiw5M4-J2fgfEg8GZrWCGw_rgjGPN3O';
-  
-  const supabase = supabase.createClient(supabaseUrl, supabaseKey);
-  console.log("Supabase berhasil terhubung ke toko!");
-</script>
   
 </body>
 </html>
