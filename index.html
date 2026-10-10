@@ -149,15 +149,24 @@
     let cart = [];
 
     async function fetchProducts() {
-      const { data, error } = await supabase
-        .from('products')
-        .select('*');
-        
-      if (error) {
-        console.error("Error mengambil data:", error);
-      } else {
-        products = data;
-        renderProducts(); // Tampilkan setelah data berhasil diambil
+      try {
+        // Tampilkan teks loading saat mengambil data
+        document.getElementById("products").innerHTML = "<p>Memuat produk dari database...</p>";
+
+        const { data, error } = await supabase
+          .from('products')
+          .select('*');
+          
+        if (error) {
+          // Jika Supabase menolak, tampilkan error warna merah
+          document.getElementById("products").innerHTML = `<p style="color:red;">Error Supabase: ${error.message}</p>`;
+        } else {
+          products = data || [];
+          renderProducts();
+        }
+      } catch (err) {
+        // Jika jaringan gagal, tampilkan error
+        document.getElementById("products").innerHTML = `<p style="color:red;">Error Sistem: ${err.message}</p>`;
       }
     }
 
@@ -170,8 +179,13 @@
     }
 
     function renderProducts() {
-      const keyword = document.getElementById("search").value.toLowerCase().trim();
-      const filtered = products.filter(p => p.name.toLowerCase().includes(keyword));
+      const searchInput = document.getElementById("search");
+      if (!searchInput) return;
+
+      const keyword = searchInput.value.toLowerCase().trim();
+      
+      // Mencegah error jika ada nama produk yang kosong (null) di database
+      const filtered = products.filter(p => (p.name || "").toLowerCase().includes(keyword));
 
       document.getElementById("products").innerHTML =
         filtered.length
@@ -179,15 +193,15 @@
             <article class="card">
               <div class="picture">📦</div>
               <div class="info">
-                <div class="name">${p.name}</div>
-                <div class="price">${rupiah(p.price)}</div>
+                <div class="name">${p.name || 'Tanpa Nama'}</div>
+                <div class="price">${rupiah(p.price || 0)}</div>
                 <button onclick="addToCart(${p.id})">
                   + Keranjang
                 </button>
               </div>
             </article>
           `).join("")
-          : "<p>Produk tidak ditemukan.</p>";
+          : "<p>Produk tidak ditemukan atau belum ada di database.</p>";
     }
 
     function addToCart(id) {
@@ -202,19 +216,21 @@
 
     function renderCart() {
       const container = document.getElementById("cartItems");
+      if (!container) return;
 
       container.innerHTML = cart.length
         ? cart.map(p => `
           <p>
-            📦 ${p.name} × ${p.qty}
-            — ${rupiah(p.price * p.qty)}
+            📦 ${p.name || 'Tanpa Nama'} × ${p.qty}
+            — ${rupiah((p.price || 0) * p.qty)}
             <button onclick="removeItem(${p.id})">Hapus</button>
           </p>
         `).join("")
         : "Keranjang masih kosong.";
 
-      const total = cart.reduce((sum, p) => sum + p.price * p.qty, 0);
-      document.getElementById("total").textContent = "Total: " + rupiah(total);
+      const total = cart.reduce((sum, p) => sum + (p.price || 0) * p.qty, 0);
+      const totalEl = document.getElementById("total");
+      if (totalEl) totalEl.textContent = "Total: " + rupiah(total);
     }
 
     function removeItem(id) {
@@ -223,15 +239,21 @@
     }
 
     function checkout() {
-      document.getElementById("notice").textContent =
+      const notice = document.getElementById("notice");
+      if (!notice) return;
+
+      notice.textContent =
         cart.length
           ? "Demo berhasil! Checkout dan pembayaran online akan kita tambahkan berikutnya."
           : "Silakan tambahkan produk ke keranjang dahulu.";
     }
 
-    document.getElementById("search").addEventListener("keydown", event => {
-      if (event.key === "Enter") renderProducts();
-    });
+    const searchEl = document.getElementById("search");
+    if (searchEl) {
+      searchEl.addEventListener("keydown", event => {
+        if (event.key === "Enter") renderProducts();
+      });
+    }
 
     // Panggil saat web pertama dibuka
     fetchProducts();
