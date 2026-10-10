@@ -239,13 +239,25 @@
     }
 
     function checkout() {
-      const notice = document.getElementById("notice");
-      if (!notice) return;
+      if (cart.length === 0) {
+        document.getElementById("notice").textContent = "Silakan tambahkan produk ke keranjang dahulu.";
+        return;
+      }
 
-      notice.textContent =
-        cart.length
-          ? "Demo berhasil! Checkout dan pembayaran online akan kita tambahkan berikutnya."
-          : "Silakan tambahkan produk ke keranjang dahulu.";
+      // ⚠️ UBAH NOMOR DI BAWAH INI DENGAN NOMOR WHATSAPP KAMU (Contoh: 6281234567890)
+      const nomorAdmin = "6281234567890"; 
+
+      let pesan = "Halo Kak, saya ingin memesan produk berikut:\n\n";
+      
+      cart.forEach(p => {
+        pesan += `- ${p.name} (${p.qty}x) = ${rupiah(p.price * p.qty)}\n`;
+      });
+
+      const total = cart.reduce((sum, p) => sum + (p.price || 0) * p.qty, 0);
+      pesan += `\n*Total Belanja: ${rupiah(total)}*\n\nMohon informasi selanjutnya, terima kasih!`;
+
+      const urlWA = `https://wa.me/${nomorAdmin}?text=${encodeURIComponent(pesan)}`;
+      window.open(urlWA, '_blank');
     }
 
     const searchEl = document.getElementById("search");
@@ -260,4 +272,3 @@
   </script>
 </body>
 </html>
-
