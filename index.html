@@ -45,6 +45,31 @@
       cursor: pointer;
     }
     .search button { background: #333; }
+    
+    /* Style untuk Tombol Kategori */
+    .categories {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+    .cat-btn {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 14px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .cat-btn.active {
+      background: white;
+      color: #ee4d2d;
+      font-weight: bold;
+    }
+
     main { padding: 20px 5%; }
     .banner {
       background: white;
@@ -110,6 +135,10 @@
       <input id="search" placeholder="Cari produk..." aria-label="Cari produk">
       <button onclick="renderProducts()">Cari</button>
     </div>
+    <!-- Tombol Kategori -->
+    <div class="categories" id="categoryContainer">
+      <button class="cat-btn active" onclick="filterCategory('Semua', this)">Semua</button>
+    </div>
   </header>
 
   <main>
@@ -147,6 +176,7 @@
   <script>
     let products = [];
     let cart = [];
+    let selectedCategory = "Semua";
 
     async function fetchProducts() {
       try {
@@ -160,11 +190,34 @@
           document.getElementById("products").innerHTML = `<p style="color:red;">Error Supabase: ${error.message}</p>`;
         } else {
           products = data || [];
+          generateCategories();
           renderProducts();
         }
       } catch (err) {
         document.getElementById("products").innerHTML = `<p style="color:red;">Error Sistem: ${err.message}</p>`;
       }
+    }
+
+    function generateCategories() {
+      const container = document.getElementById("categoryContainer");
+      // Ambil kategori unik dari data produk
+      const categories = ["Semua", ...new Set(products.map(p => p.category).filter(Boolean))];
+      
+      container.innerHTML = categories.map(cat => `
+        <button class="cat-btn ${cat === selectedCategory ? 'active' : ''}" onclick="filterCategory('${cat}', this)">
+          ${cat}
+        </button>
+      `).join("");
+    }
+
+    function filterCategory(category, element) {
+      selectedCategory = category;
+      
+      // Ubah tombol aktif
+      document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
+      element.classList.add('active');
+
+      renderProducts();
     }
 
     function rupiah(number) {
@@ -181,7 +234,11 @@
 
       const keyword = searchInput.value.toLowerCase().trim();
       
-      const filtered = products.filter(p => (p.name || "").toLowerCase().includes(keyword));
+      const filtered = products.filter(p => {
+        const matchKeyword = (p.name || "").toLowerCase().includes(keyword);
+        const matchCategory = selectedCategory === "Semua" || p.category === selectedCategory;
+        return matchKeyword && matchCategory;
+      });
 
       document.getElementById("products").innerHTML =
         filtered.length
@@ -201,7 +258,7 @@
               </div>
             </article>
           `).join("")
-          : "<p>Produk tidak ditemukan atau belum ada di database.</p>";
+          : "<p>Produk tidak ditemukan dalam kategori ini.</p>";
     }
 
     function addToCart(id) {
@@ -244,8 +301,7 @@
         return;
       }
 
-      // ⚠️ UBAH NOMOR DI BAWAH INI DENGAN NOMOR WHATSAPP KAMU (Contoh: 6281234567890)
-      const nomorAdmin = "6281234567890"; 
+      const nomorAdmin = "6281234567890"; // Ganti dengan nomor WhatsApp kamu jika belum
 
       let pesan = "Halo Kak, saya ingin memesan produk berikut:\n\n";
       
