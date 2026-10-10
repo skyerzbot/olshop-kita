@@ -131,33 +131,35 @@
     </section>
   </main>
 
-  <footer>
+    <footer>
     © 2026 Olshop Kita · Website toko online
   </footer>
 
+  <!-- 1. Load Supabase DULU -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
-   
-// Variabel untuk menyimpan data dari Supabase
-let products = [];
+    const supabaseUrl = 'https://ztpodvtqggdjxkkzupax.supabase.co';
+    const supabaseKey = 'sb_publishable_wiw5M4-J2fgfEg8GZrWCGw_rgjGPN3O';
+    const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+  </script>
 
-// Fungsi untuk mengambil data dari Supabase
-async function fetchProducts() {
-  const { data, error } = await supabase
-    .from('products')
-    .select('*');
-    
-  if (error) {
-    console.error("Error mengambil data:", error);
-  } else {
-    products = data;
-    renderProducts(); // Tampilkan produk setelah data diambil
-  }
-}
-
-// Panggil fungsi fetch saat halaman dimuat
-fetchProducts();
-    
+  <!-- 2. Jalankan logika website -->
+  <script>
+    let products = [];
     let cart = [];
+
+    async function fetchProducts() {
+      const { data, error } = await supabase
+        .from('products')
+        .select('*');
+        
+      if (error) {
+        console.error("Error mengambil data:", error);
+      } else {
+        products = data;
+        renderProducts(); // Tampilkan setelah data berhasil diambil
+      }
+    }
 
     function rupiah(number) {
       return new Intl.NumberFormat("id-ID", {
@@ -168,18 +170,14 @@ fetchProducts();
     }
 
     function renderProducts() {
-      const keyword = document.getElementById("search")
-        .value.toLowerCase().trim();
-
-      const filtered = products.filter(p =>
-        p.name.toLowerCase().includes(keyword)
-      );
+      const keyword = document.getElementById("search").value.toLowerCase().trim();
+      const filtered = products.filter(p => p.name.toLowerCase().includes(keyword));
 
       document.getElementById("products").innerHTML =
         filtered.length
           ? filtered.map(p => `
             <article class="card">
-              <div class="picture">${p.icon}</div>
+              <div class="picture">📦</div>
               <div class="info">
                 <div class="name">${p.name}</div>
                 <div class="price">${rupiah(p.price)}</div>
@@ -208,19 +206,15 @@ fetchProducts();
       container.innerHTML = cart.length
         ? cart.map(p => `
           <p>
-            ${p.icon} ${p.name} × ${p.qty}
+            📦 ${p.name} × ${p.qty}
             — ${rupiah(p.price * p.qty)}
             <button onclick="removeItem(${p.id})">Hapus</button>
           </p>
         `).join("")
         : "Keranjang masih kosong.";
 
-      const total = cart.reduce(
-        (sum, p) => sum + p.price * p.qty, 0
-      );
-
-      document.getElementById("total").textContent =
-        "Total: " + rupiah(total);
+      const total = cart.reduce((sum, p) => sum + p.price * p.qty, 0);
+      document.getElementById("total").textContent = "Total: " + rupiah(total);
     }
 
     function removeItem(id) {
@@ -235,31 +229,13 @@ fetchProducts();
           : "Silakan tambahkan produk ke keranjang dahulu.";
     }
 
-    document.getElementById("search").addEventListener(
-      "keydown", event => {
-        if (event.key === "Enter") renderProducts();
-      }
-    );
+    document.getElementById("search").addEventListener("keydown", event => {
+      if (event.key === "Enter") renderProducts();
+    });
 
-    renderProducts();
+    // Panggil saat web pertama dibuka
+    fetchProducts();
     renderCart();
   </script>
-    </footer>
-
-  <!-- Load Supabase yang baru dipaste -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script>
-    const supabaseUrl = '...';
-    // ... sisa kode koneksi ...
-  </script>
-
-  <!-- Script utama website -->
-  <script>
-  // Variabel untuk menyimpan data dari Supabase
-  let products = [];
-  // ...
-    
-  
-  
 </body>
 </html>
