@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#1a1a1a">
-  <title>kukingkang Sky Bontang </title>
+  <title>Sky Casual Store - Toko Baju & Celana Pria/Wanita</title>
   <style>
     * { box-sizing: border-box; }
     body {
@@ -31,8 +31,8 @@
     }
     .brand-container { display: flex; align-items: center; gap: 10px; }
     .brand-logo {
-      background: #f39c12;
-      color: #121212;
+      background: #ee4d2d;
+      color: #fff;
       width: 40px;
       height: 40px;
       display: grid;
@@ -42,7 +42,7 @@
       font-size: 20px;
     }
     .brand { font-size: 18px; font-weight: bold; color: #fff; }
-    .brand-sub { font-size: 11px; color: #f39c12; text-transform: uppercase; letter-spacing: 1px; font-weight: bold; }
+    .brand-sub { font-size: 11px; color: #ee4d2d; text-transform: uppercase; letter-spacing: 1px; font-weight: bold; }
     
     .header-icons { display: flex; gap: 10px; }
     .icon-btn {
@@ -78,8 +78,8 @@
     .search input { flex: 1; }
     button {
       border: 0;
-      background: #f39c12;
-      color: #121212;
+      background: #ee4d2d;
+      color: white;
       font-weight: bold;
       cursor: pointer;
     }
@@ -104,15 +104,15 @@
       white-space: nowrap;
     }
     .cat-btn.active {
-      background: #f39c12;
-      color: #121212;
+      background: #ee4d2d;
+      color: #fff;
       font-weight: bold;
-      border-color: #f39c12;
+      border-color: #ee4d2d;
     }
 
     main { padding: 20px 5%; }
     
-    /* Banner & Info Grid ala Shinn Store */
+    /* Banner & Info Grid */
     .banner {
       background: #1a1a1a;
       border: 1px solid #333;
@@ -176,12 +176,12 @@
       top: 8px;
       left: 8px;
       background: rgba(0, 0, 0, 0.8);
-      color: #f39c12;
+      color: #ee4d2d;
       font-size: 9px;
       font-weight: bold;
       padding: 3px 8px;
       border-radius: 4px;
-      border: 1px solid #f39c12;
+      border: 1px solid #ee4d2d;
       text-transform: uppercase;
     }
     .picture {
@@ -196,7 +196,7 @@
     .name { min-height: 38px; color: #fff; font-size: 13px; font-weight: bold; }
     .price-label { font-size: 10px; color: #888; margin-top: 6px; }
     .price {
-      color: #f39c12;
+      color: #ee4d2d;
       font-weight: bold;
       font-size: 14px;
       margin: 2px 0 10px 0;
@@ -210,9 +210,9 @@
       padding: 8px;
     }
     .card button:hover {
-      background: #f39c12;
-      color: #121212;
-      border-color: #f39c12;
+      background: #ee4d2d;
+      color: #fff;
+      border-color: #ee4d2d;
     }
 
     /* Keranjang Belanja */
@@ -228,9 +228,9 @@
     #cartItems p { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #2a2a2a; padding-bottom: 8px; }
     #cartItems button { background: #d9534f; color: white; padding: 4px 8px; font-size: 11px; }
     #total { color: #fff; }
-    #cart > button { width: 100%; background: #f39c12; color: #121212; font-weight: bold; margin-top: 10px; }
+    #cart > button { width: 100%; background: #ee4d2d; color: #fff; font-weight: bold; margin-top: 10px; }
 
-    /* Footer Ala Shinn Store */
+    /* Footer */
     footer {
       background: #161616;
       border-top: 1px solid #2a2a2a;
@@ -239,13 +239,13 @@
       font-size: 12px;
       margin-top: 40px;
     }
-    .footer-brand { color: #f39c12; font-weight: bold; font-size: 16px; margin-bottom: 8px; }
+    .footer-brand { color: #ee4d2d; font-weight: bold; font-size: 16px; margin-bottom: 8px; }
     .footer-desc { margin-bottom: 15px; color: #aaa; font-size: 12px; line-height: 1.5; }
     .footer-nav { margin-bottom: 20px; }
     .footer-nav h4 { color: #fff; font-size: 14px; margin-bottom: 10px; }
     .footer-links { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
     .footer-links a { color: #aaa; text-decoration: none; }
-    .footer-links a:hover { color: #f39c12; }
+    .footer-links a:hover { color: #ee4d2d; }
     
     .social-icons { display: flex; gap: 10px; margin-top: 15px; }
     .social-btn {
@@ -273,19 +273,19 @@
   <header>
     <div class="top">
       <div class="brand-container">
-        <div class="brand-logo">🛡️</div>
+        <div class="brand-logo">👕</div>
         <div>
-          <div class="brand">Totokotop sky bontang</div>
-          <div class="brand-sub">casual</div>
+          <div class="brand">Sky Casual Store</div>
+          <div class="brand-sub">PREMIUM FASHION & CLOTHING</div>
         </div>
       </div>
       <div class="header-icons">
         <a href="#" class="icon-btn">💬</a>
-        <a href="#" class="icon-btn">🔔</a>
+        <a href="#" class="icon-btn">🛍️</a>
       </div>
     </div>
     <div class="search">
-      <input id="search" placeholder="Cari game atau produk..." aria-label="Cari produk">
+      <input id="search" placeholder="Cari baju atau celana..." aria-label="Cari produk">
       <button onclick="renderProducts()">Cari</button>
     </div>
     <div class="categories" id="categoryContainer">
@@ -294,38 +294,38 @@
   </header>
 
   <main>
-    <!-- Banner & Info Grid Ala Shinn Store -->
+    <!-- Banner & Info Grid -->
     <section class="banner">
-      <h1>SHINN STORE</h1>
-      <p>Toko cheat game premium dengan sistem auto order QRIS 24 jam. Proses instan, aman, dan bergaransi.</p>
+      <h1>SKY CASUAL STORE</h1>
+      <p>Pusat pakaian dan celana casual berkualitas tinggi, nyaman dipakai, dan harga bersahabat.</p>
       
       <div class="info-grid">
         <div class="info-box">
-          <span>🎮</span>
+          <span>👕</span>
           <div>
-            <h4>10+ Game</h4>
-            <p>Tersedia</p>
+            <h4>Baju & Kemeja</h4>
+            <p>Model Terbaru</p>
           </div>
         </div>
         <div class="info-box">
-          <span>⚡</span>
+          <span>👖</span>
           <div>
-            <h4>< 1 Menit</h4>
-            <p>Aktivasi Instan</p>
+            <h4>Celana Jeans</h4>
+            <p>& Chino Premium</p>
           </div>
         </div>
         <div class="info-box">
-          <span>💳</span>
+          <span>🚚</span>
           <div>
-            <h4>QRIS</h4>
-            <p>Bayar Kapan Saja</p>
+            <h4>Pengiriman</h4>
+            <p>Cepat & Aman</p>
           </div>
         </div>
         <div class="info-box">
-          <span>🎧</span>
+          <span>⭐</span>
           <div>
-            <h4>24/7</h4>
-            <p>Support Admin</p>
+            <h4>100% Original</h4>
+            <p>Bahan Berkualitas</p>
           </div>
         </div>
       </div>
@@ -333,14 +333,14 @@
 
     <!-- Fitur Strip -->
     <div class="features-strip">
-      <div>🛡️ 100% Aman</div>
-      <div>⚡ Proses Instan</div>
-      <div>💳 Bayar QRIS</div>
+      <div>🛡️ Bahan Berkualitas</div>
+      <div>⚡ Pengiriman Cepat</div>
+      <div>💬 Respon Admin Ramah</div>
     </div>
 
     <h2 class="section-title">
-      <span>✨ Katalog Game</span>
-      <span style="font-size: 12px; color: #888; font-weight: normal;" id="productCount">0 Game</span>
+      <span>✨ Katalog Produk</span>
+      <span style="font-size: 12px; color: #888; font-weight: normal;" id="productCount">0 Produk</span>
     </h2>
     <section class="products" id="products"></section>
 
@@ -349,35 +349,35 @@
       <div id="cartItems">Keranjang masih kosong.</div>
       <h3 id="total">Total: Rp0</h3>
       <button onclick="checkout()">Lanjutkan Pesanan via WhatsApp</button>
-      <p id="notice" style="color: #f39c12; text-align: center; margin-top: 8px; font-size: 13px;"></p>
+      <p id="notice" style="color: #ee4d2d; text-align: center; margin-top: 8px; font-size: 13px;"></p>
     </section>
   </main>
 
   <footer>
-    <div class="footer-brand">🛡️ SHINN STORE</div>
-    <div class="footer-desc">Toko cheat game premium dengan sistem auto order QRIS 24 jam. Proses instan, aman, dan bergaransi.</div>
+    <div class="footer-brand">👕 SKY CASUAL STORE</div>
+    <div class="footer-desc">Pusat belanja baju dan celana casual terbaik dengan koleksi pilihan untuk gaya harianmu.</div>
     
     <div class="footer-nav">
       <h4>NAVIGASI</h4>
       <ul class="footer-links">
-        <li><a href="#">› Order</a></li>
-        <li><a href="#">› Cek Member</a></li>
-        <li><a href="#">› Perpanjangan</a></li>
-        <li><a href="#">› Tutorial</a></li>
+        <li><a href="#">› Katalog Baju</a></li>
+        <li><a href="#">› Katalog Celana</a></li>
+        <li><a href="#">› Cara Order</a></li>
+        <li><a href="#">› Cek Resi</a></li>
       </ul>
     </div>
 
     <div style="margin-top: 15px;">
-      <h4 style="color: #fff; font-size: 14px; margin-bottom: 8px;">FOLLOW US</h4>
+      <h4 style="color: #fff; font-size: 14px; margin-bottom: 8px;">IKUTI KAMI</h4>
       <div class="social-icons">
         <a href="#" class="social-btn">💬</a>
-        <a href="#" class="social-btn">📢</a>
+        <a href="#" class="social-btn">📷</a>
         <a href="#" class="social-btn">🎵</a>
       </div>
     </div>
 
     <div class="copyright">
-      © 2026 SHINN STORE · Semua hak dilindungi undang-undang.
+      © 2026 SKY CASUAL STORE · Semua hak dilindungi undang-undang.
     </div>
   </footer>
 
@@ -453,24 +453,24 @@
         return matchKeyword && matchCategory;
       });
 
-      document.getElementById("productCount").textContent = filtered.length + " Game";
+      document.getElementById("productCount").textContent = filtered.length + " Produk";
 
       document.getElementById("products").innerHTML =
         filtered.length
           ? filtered.map(p => `
             <article class="card">
-              <div class="badge-platform">${p.category || 'GAME'}</div>
+              <div class="badge-platform">${p.category || 'FASHION'}</div>
               <div class="picture">
                 ${p.image_url 
                   ? `<img src="${p.image_url}" style="width: 100%; height: 100%; object-fit: cover;" alt="Gambar Produk">` 
-                  : '🎮'}
+                  : '👕'}
               </div>
               <div class="info">
                 <div class="name">${p.name || 'Tanpa Nama'}</div>
-                <div class="price-label">Mulai dari</div>
+                <div class="price-label">Harga</div>
                 <div class="price">${rupiah(p.price || 0)}</div>
                 <button onclick="addToCart(${p.id})">
-                  Pilih Paket
+                  + Keranjang
                 </button>
               </div>
             </article>
@@ -495,7 +495,7 @@
       container.innerHTML = cart.length
         ? cart.map(p => `
           <p>
-            <span>🎮 ${p.name || 'Tanpa Nama'} × ${p.qty} — <b>${rupiah((p.price || 0) * p.qty)}</b></span>
+            <span>🛍️ ${p.name || 'Tanpa Nama'} × ${p.qty} — <b>${rupiah((p.price || 0) * p.qty)}</b></span>
             <button onclick="removeItem(${p.id})">Hapus</button>
           </p>
         `).join("")
@@ -513,20 +513,20 @@
 
     function checkout() {
       if (cart.length === 0) {
-        document.getElementById("notice").textContent = "Silakan pilih paket/produk ke keranjang dahulu.";
+        document.getElementById("notice").textContent = "Silakan tambahkan produk ke keranjang dahulu.";
         return;
       }
 
       const nomorAdmin = "6281234567890"; // Ganti dengan nomor WhatsApp kamu
 
-      let pesan = "Halo Shinn Store, saya ingin memesan produk berikut:\n\n";
+      let pesan = "Halo Sky Casual Store, saya ingin memesan produk berikut:\n\n";
       
       cart.forEach(p => {
         pesan += `- ${p.name} (${p.qty}x) = ${rupiah(p.price * p.qty)}\n`;
       });
 
       const total = cart.reduce((sum, p) => sum + (p.price || 0) * p.qty, 0);
-      pesan += `\n*Total Pembayaran: ${rupiah(total)}*\n\nMohon instruksi selanjutnya, terima kasih!`;
+      pesan += `\n*Total Pembayaran: ${rupiah(total)}*\n\nMohon informasi selanjutnya, terima kasih!`;
 
       const urlWA = `https://wa.me/${nomorAdmin}?text=${encodeURIComponent(pesan)}`;
       window.open(urlWA, '_blank');
