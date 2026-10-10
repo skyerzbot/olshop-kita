@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#1a1a1a">
-  <title>KoKop Store Bontang</title>
+  <title>kukingkang Sky Bontang </title>
   <style>
     * { box-sizing: border-box; }
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #121212; /* Tema gelap ala Shinn Store */
+      background: #121212;
       color: #e0e0e0;
     }
     header {
@@ -29,9 +29,35 @@
       gap: 12px;
       flex-wrap: wrap;
     }
-    .brand { font-size: 20px; font-weight: bold; color: #f39c12; }
-    .brand-sub { font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 1px; }
+    .brand-container { display: flex; align-items: center; gap: 10px; }
+    .brand-logo {
+      background: #f39c12;
+      color: #121212;
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 20px;
+    }
+    .brand { font-size: 18px; font-weight: bold; color: #fff; }
+    .brand-sub { font-size: 11px; color: #f39c12; text-transform: uppercase; letter-spacing: 1px; font-weight: bold; }
     
+    .header-icons { display: flex; gap: 10px; }
+    .icon-btn {
+      background: #222;
+      border: 1px solid #333;
+      color: #fff;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
     .search {
       display: flex;
       gap: 8px;
@@ -52,14 +78,14 @@
     .search input { flex: 1; }
     button {
       border: 0;
-      background: #f39c12; /* Warna khas emas/kuning Shinn Store */
+      background: #f39c12;
       color: #121212;
       font-weight: bold;
       cursor: pointer;
     }
     .search button { background: #333; color: white; border: 1px solid #444; }
 
-    /* Tombol Kategori Ala Store Game */
+    /* Tombol Kategori */
     .categories {
       display: flex;
       gap: 8px;
@@ -86,19 +112,51 @@
 
     main { padding: 20px 5%; }
     
-    /* Banner ala Shinn Store */
+    /* Banner & Info Grid ala Shinn Store */
     .banner {
-      background: #1e1e1e;
+      background: #1a1a1a;
       border: 1px solid #333;
-      padding: 24px;
+      padding: 20px;
       border-radius: 12px;
-      margin-bottom: 22px;
+      margin-bottom: 15px;
+    }
+    .banner h1 { color: #fff; margin-top: 0; font-size: 18px; }
+    .banner p { color: #aaa; font-size: 13px; margin-bottom: 15px; }
+    
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .info-box {
+      background: #1e1e1e;
+      border: 1px solid #2a2a2a;
+      padding: 12px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .info-box span { font-size: 20px; }
+    .info-box h4 { margin: 0; font-size: 13px; color: #fff; }
+    .info-box p { margin: 2px 0 0 0; font-size: 11px; color: #888; }
+
+    /* Fitur Keunggulan Strip */
+    .features-strip {
+      display: flex;
+      justify-content: space-between;
+      background: #1a1a1a;
+      border: 1px solid #333;
+      padding: 12px 15px;
+      border-radius: 10px;
+      margin-bottom: 25px;
+      font-size: 11px;
+      color: #ccc;
       text-align: center;
     }
-    .banner h1 { color: #f39c12; margin-top: 0; font-size: 22px; }
-    .banner p { color: #aaa; font-size: 14px; }
 
-    .section-title { color: #fff; margin-bottom: 15px; font-size: 18px; display: flex; align-items: center; gap: 8px; }
+    .section-title { color: #fff; margin-bottom: 15px; font-size: 18px; display: flex; justify-content: space-between; align-items: center; }
 
     /* Grid Produk */
     .products {
@@ -113,14 +171,13 @@
       overflow: hidden;
       position: relative;
     }
-    /* Badge Platform (PC / MOBILE) */
     .badge-platform {
       position: absolute;
       top: 8px;
       left: 8px;
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(0, 0, 0, 0.8);
       color: #f39c12;
-      font-size: 10px;
+      font-size: 9px;
       font-weight: bold;
       padding: 3px 8px;
       border-radius: 4px;
@@ -132,16 +189,16 @@
       height: 125px;
       display: grid;
       place-items: center;
-      font-size: 55px;
+      font-size: 50px;
       overflow: hidden;
     }
     .info { padding: 12px; }
-    .name { min-height: 38px; color: #fff; font-size: 14px; font-weight: bold; }
-    .price-label { font-size: 11px; color: #888; margin-top: 6px; }
+    .name { min-height: 38px; color: #fff; font-size: 13px; font-weight: bold; }
+    .price-label { font-size: 10px; color: #888; margin-top: 6px; }
     .price {
       color: #f39c12;
       font-weight: bold;
-      font-size: 15px;
+      font-size: 14px;
       margin: 2px 0 10px 0;
     }
     .card button { 
@@ -149,7 +206,7 @@
       background: #2a2a2a; 
       color: #fff; 
       border: 1px solid #444;
-      font-size: 13px;
+      font-size: 12px;
       padding: 8px;
     }
     .card button:hover {
@@ -173,28 +230,59 @@
     #total { color: #fff; }
     #cart > button { width: 100%; background: #f39c12; color: #121212; font-weight: bold; margin-top: 10px; }
 
+    /* Footer Ala Shinn Store */
     footer {
-      text-align: center;
-      padding: 25px;
-      color: #666;
+      background: #161616;
+      border-top: 1px solid #2a2a2a;
+      padding: 30px 5%;
+      color: #888;
       font-size: 12px;
-      border-top: 1px solid #222;
       margin-top: 40px;
     }
+    .footer-brand { color: #f39c12; font-weight: bold; font-size: 16px; margin-bottom: 8px; }
+    .footer-desc { margin-bottom: 15px; color: #aaa; font-size: 12px; line-height: 1.5; }
+    .footer-nav { margin-bottom: 20px; }
+    .footer-nav h4 { color: #fff; font-size: 14px; margin-bottom: 10px; }
+    .footer-links { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+    .footer-links a { color: #aaa; text-decoration: none; }
+    .footer-links a:hover { color: #f39c12; }
+    
+    .social-icons { display: flex; gap: 10px; margin-top: 15px; }
+    .social-btn {
+      width: 32px;
+      height: 32px;
+      background: #222;
+      border: 1px solid #333;
+      color: #fff;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .copyright { text-align: center; border-top: 1px solid #222; padding-top: 15px; margin-top: 20px; color: #666; font-size: 11px; }
+
     @media (min-width: 650px) {
       .products { grid-template-columns: repeat(4, minmax(0, 1fr)); }
       .picture { height: 170px; }
+      .info-grid { grid-template-columns: repeat(4, 1fr); }
     }
   </style>
 </head>
 <body>
   <header>
     <div class="top">
-      <div>
-        <div class="brand">🛡️ Shinn Store</div>
-        <div class="brand-sub">Premium Cheat & Game Store</div>
+      <div class="brand-container">
+        <div class="brand-logo">🛡️</div>
+        <div>
+          <div class="brand">Shinn Store</div>
+          <div class="brand-sub">ALL CHEAT GAMES</div>
+        </div>
       </div>
-      <div style="font-size: 13px; color: #aaa;">💬 24/7 Support</div>
+      <div class="header-icons">
+        <a href="#" class="icon-btn">💬</a>
+        <a href="#" class="icon-btn">🔔</a>
+      </div>
     </div>
     <div class="search">
       <input id="search" placeholder="Cari game atau produk..." aria-label="Cari produk">
@@ -206,12 +294,54 @@
   </header>
 
   <main>
+    <!-- Banner & Info Grid Ala Shinn Store -->
     <section class="banner">
-      <h1>Sistem Otomatis 24 Jam</h1>
-      <p>Proses instan, aman, dan bergaransi tanpa menunggu admin.</p>
+      <h1>SHINN STORE</h1>
+      <p>Toko cheat game premium dengan sistem auto order QRIS 24 jam. Proses instan, aman, dan bergaransi.</p>
+      
+      <div class="info-grid">
+        <div class="info-box">
+          <span>🎮</span>
+          <div>
+            <h4>10+ Game</h4>
+            <p>Tersedia</p>
+          </div>
+        </div>
+        <div class="info-box">
+          <span>⚡</span>
+          <div>
+            <h4>< 1 Menit</h4>
+            <p>Aktivasi Instan</p>
+          </div>
+        </div>
+        <div class="info-box">
+          <span>💳</span>
+          <div>
+            <h4>QRIS</h4>
+            <p>Bayar Kapan Saja</p>
+          </div>
+        </div>
+        <div class="info-box">
+          <span>🎧</span>
+          <div>
+            <h4>24/7</h4>
+            <p>Support Admin</p>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <h2 class="section-title">🎮 Katalog Game & Produk</h2>
+    <!-- Fitur Strip -->
+    <div class="features-strip">
+      <div>🛡️ 100% Aman</div>
+      <div>⚡ Proses Instan</div>
+      <div>💳 Bayar QRIS</div>
+    </div>
+
+    <h2 class="section-title">
+      <span>✨ Katalog Game</span>
+      <span style="font-size: 12px; color: #888; font-weight: normal;" id="productCount">0 Game</span>
+    </h2>
     <section class="products" id="products"></section>
 
     <section id="cart">
@@ -219,12 +349,36 @@
       <div id="cartItems">Keranjang masih kosong.</div>
       <h3 id="total">Total: Rp0</h3>
       <button onclick="checkout()">Lanjutkan Pesanan via WhatsApp</button>
-      <p id="notice" style="color: #f39c12; text-align: center; margin-top: 8px;"></p>
+      <p id="notice" style="color: #f39c12; text-align: center; margin-top: 8px; font-size: 13px;"></p>
     </section>
   </main>
 
   <footer>
-    © 2026 Shinn Store · All rights reserved.
+    <div class="footer-brand">🛡️ SHINN STORE</div>
+    <div class="footer-desc">Toko cheat game premium dengan sistem auto order QRIS 24 jam. Proses instan, aman, dan bergaransi.</div>
+    
+    <div class="footer-nav">
+      <h4>NAVIGASI</h4>
+      <ul class="footer-links">
+        <li><a href="#">› Order</a></li>
+        <li><a href="#">› Cek Member</a></li>
+        <li><a href="#">› Perpanjangan</a></li>
+        <li><a href="#">› Tutorial</a></li>
+      </ul>
+    </div>
+
+    <div style="margin-top: 15px;">
+      <h4 style="color: #fff; font-size: 14px; margin-bottom: 8px;">FOLLOW US</h4>
+      <div class="social-icons">
+        <a href="#" class="social-btn">💬</a>
+        <a href="#" class="social-btn">📢</a>
+        <a href="#" class="social-btn">🎵</a>
+      </div>
+    </div>
+
+    <div class="copyright">
+      © 2026 SHINN STORE · Semua hak dilindungi undang-undang.
+    </div>
   </footer>
 
   <!-- 1. Load Supabase -->
@@ -298,6 +452,8 @@
         const matchCategory = selectedCategory === "Semua" || p.category === selectedCategory;
         return matchKeyword && matchCategory;
       });
+
+      document.getElementById("productCount").textContent = filtered.length + " Game";
 
       document.getElementById("products").innerHTML =
         filtered.length
