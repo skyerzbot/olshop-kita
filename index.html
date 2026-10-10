@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -71,6 +70,7 @@
       display: grid;
       place-items: center;
       font-size: 55px;
+      overflow: hidden;
     }
     .info { padding: 12px; }
     .name { min-height: 38px; }
@@ -131,7 +131,7 @@
     </section>
   </main>
 
-      <footer>
+  <footer>
     © 2026 Olshop Kita · Website toko online
   </footer>
 
@@ -140,7 +140,6 @@
   <script>
     const supabaseUrl = 'https://ztpodvtqggdjxkkzupax.supabase.co';
     const supabaseKey = 'sb_publishable_wiw5M4-J2fgfEg8GZrWCGw_rgjGPN3O';
-    // KITA UBAH NAMANYA JADI supabaseClient AGAR TIDAK BENTROK
     const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
   </script>
 
@@ -153,7 +152,6 @@
       try {
         document.getElementById("products").innerHTML = "<p>Memuat produk dari database...</p>";
 
-        // Gunakan supabaseClient yang baru dibuat
         const { data, error } = await supabaseClient
           .from('products')
           .select('*');
@@ -189,7 +187,11 @@
         filtered.length
           ? filtered.map(p => `
             <article class="card">
-              <div class="picture">📦</div>
+              <div class="picture">
+                ${p.image_url 
+                  ? `<img src="${p.image_url}" style="width: 100%; height: 100%; object-fit: cover;" alt="Gambar Produk">` 
+                  : '📦'}
+              </div>
               <div class="info">
                 <div class="name">${p.name || 'Tanpa Nama'}</div>
                 <div class="price">${rupiah(p.price || 0)}</div>
@@ -258,3 +260,4 @@
   </script>
 </body>
 </html>
+
