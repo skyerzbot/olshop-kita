@@ -131,41 +131,40 @@
     </section>
   </main>
 
-    <footer>
+      <footer>
     © 2026 Olshop Kita · Website toko online
   </footer>
 
-  <!-- 1. Load Supabase DULU -->
+  <!-- 1. Load Supabase -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
     const supabaseUrl = 'https://ztpodvtqggdjxkkzupax.supabase.co';
     const supabaseKey = 'sb_publishable_wiw5M4-J2fgfEg8GZrWCGw_rgjGPN3O';
-    const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+    // KITA UBAH NAMANYA JADI supabaseClient AGAR TIDAK BENTROK
+    const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
   </script>
 
-  <!-- 2. Jalankan logika website -->
+  <!-- 2. Script utama website -->
   <script>
     let products = [];
     let cart = [];
 
     async function fetchProducts() {
       try {
-        // Tampilkan teks loading saat mengambil data
         document.getElementById("products").innerHTML = "<p>Memuat produk dari database...</p>";
 
-        const { data, error } = await supabase
+        // Gunakan supabaseClient yang baru dibuat
+        const { data, error } = await supabaseClient
           .from('products')
           .select('*');
           
         if (error) {
-          // Jika Supabase menolak, tampilkan error warna merah
           document.getElementById("products").innerHTML = `<p style="color:red;">Error Supabase: ${error.message}</p>`;
         } else {
           products = data || [];
           renderProducts();
         }
       } catch (err) {
-        // Jika jaringan gagal, tampilkan error
         document.getElementById("products").innerHTML = `<p style="color:red;">Error Sistem: ${err.message}</p>`;
       }
     }
@@ -184,7 +183,6 @@
 
       const keyword = searchInput.value.toLowerCase().trim();
       
-      // Mencegah error jika ada nama produk yang kosong (null) di database
       const filtered = products.filter(p => (p.name || "").toLowerCase().includes(keyword));
 
       document.getElementById("products").innerHTML =
@@ -255,7 +253,6 @@
       });
     }
 
-    // Panggil saat web pertama dibuka
     fetchProducts();
     renderCart();
   </script>
