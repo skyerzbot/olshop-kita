@@ -3,20 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#ee4d2d">
-  <title>Olshop Kita - Belanja Online</title>
+  <meta name="theme-color" content="#1a1a1a">
+  <title>Shinn Store - Premium Cheat & Game Store</title>
   <style>
     * { box-sizing: border-box; }
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      color: #222;
+      background: #121212; /* Tema gelap ala Shinn Store */
+      color: #e0e0e0;
     }
     header {
-      background: #ee4d2d;
+      background: #1a1a1a;
+      border-bottom: 1px solid #333;
       color: white;
       padding: 18px 5%;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
     .top {
       display: flex;
@@ -25,72 +29,106 @@
       gap: 12px;
       flex-wrap: wrap;
     }
-    .brand { font-size: 24px; font-weight: bold; }
+    .brand { font-size: 20px; font-weight: bold; color: #f39c12; }
+    .brand-sub { font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 1px; }
+    
     .search {
       display: flex;
       gap: 8px;
-      margin-top: 18px;
+      margin-top: 15px;
     }
     input, button {
       font: inherit;
       padding: 12px;
       border-radius: 8px;
     }
-    input { border: 1px solid #ddd; min-width: 0; }
+    input { 
+      border: 1px solid #333; 
+      background: #222; 
+      color: white; 
+      min-width: 0; 
+    }
+    input::placeholder { color: #777; }
     .search input { flex: 1; }
     button {
       border: 0;
-      background: #ee4d2d;
-      color: white;
+      background: #f39c12; /* Warna khas emas/kuning Shinn Store */
+      color: #121212;
+      font-weight: bold;
       cursor: pointer;
     }
-    .search button { background: #333; }
-    
-    /* Style untuk Tombol Kategori */
+    .search button { background: #333; color: white; border: 1px solid #444; }
+
+    /* Tombol Kategori Ala Store Game */
     .categories {
       display: flex;
       gap: 8px;
-      margin-top: 12px;
+      margin-top: 15px;
       overflow-x: auto;
       padding-bottom: 4px;
     }
     .cat-btn {
-      background: rgba(255, 255, 255, 0.2);
-      color: white;
-      border: 1px solid rgba(255, 255, 255, 0.4);
+      background: #222;
+      color: #bbb;
+      border: 1px solid #333;
       padding: 6px 14px;
       border-radius: 20px;
-      font-size: 14px;
+      font-size: 13px;
       cursor: pointer;
       white-space: nowrap;
     }
     .cat-btn.active {
-      background: white;
-      color: #ee4d2d;
+      background: #f39c12;
+      color: #121212;
       font-weight: bold;
+      border-color: #f39c12;
     }
 
     main { padding: 20px 5%; }
+    
+    /* Banner ala Shinn Store */
     .banner {
-      background: white;
+      background: #1e1e1e;
+      border: 1px solid #333;
       padding: 24px;
       border-radius: 12px;
       margin-bottom: 22px;
+      text-align: center;
     }
-    .banner h1 { color: #ee4d2d; margin-top: 0; }
+    .banner h1 { color: #f39c12; margin-top: 0; font-size: 22px; }
+    .banner p { color: #aaa; font-size: 14px; }
+
+    .section-title { color: #fff; margin-bottom: 15px; font-size: 18px; display: flex; align-items: center; gap: 8px; }
+
+    /* Grid Produk */
     .products {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 12px;
     }
     .card {
-      background: white;
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
       border-radius: 10px;
       overflow: hidden;
-      box-shadow: 0 2px 6px #0000000a;
+      position: relative;
+    }
+    /* Badge Platform (PC / MOBILE) */
+    .badge-platform {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: rgba(0, 0, 0, 0.7);
+      color: #f39c12;
+      font-size: 10px;
+      font-weight: bold;
+      padding: 3px 8px;
+      border-radius: 4px;
+      border: 1px solid #f39c12;
+      text-transform: uppercase;
     }
     .picture {
-      background: #fff0eb;
+      background: #252525;
       height: 125px;
       display: grid;
       place-items: center;
@@ -98,26 +136,50 @@
       overflow: hidden;
     }
     .info { padding: 12px; }
-    .name { min-height: 38px; }
+    .name { min-height: 38px; color: #fff; font-size: 14px; font-weight: bold; }
+    .price-label { font-size: 11px; color: #888; margin-top: 6px; }
     .price {
-      color: #ee4d2d;
+      color: #f39c12;
       font-weight: bold;
-      margin: 10px 0;
+      font-size: 15px;
+      margin: 2px 0 10px 0;
     }
-    .card button { width: 100%; }
-    .section-title { margin-bottom: 15px; }
+    .card button { 
+      width: 100%; 
+      background: #2a2a2a; 
+      color: #fff; 
+      border: 1px solid #444;
+      font-size: 13px;
+      padding: 8px;
+    }
+    .card button:hover {
+      background: #f39c12;
+      color: #121212;
+      border-color: #f39c12;
+    }
+
+    /* Keranjang Belanja */
     #cart {
-      background: white;
+      background: #1a1a1a;
+      border: 1px solid #333;
       margin-top: 24px;
       padding: 18px;
       border-radius: 12px;
     }
-    #cart button { margin: 5px 0; }
+    #cart h2 { color: #fff; font-size: 18px; margin-top: 0; }
+    #cartItems { color: #ccc; font-size: 14px; }
+    #cartItems p { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #2a2a2a; padding-bottom: 8px; }
+    #cartItems button { background: #d9534f; color: white; padding: 4px 8px; font-size: 11px; }
+    #total { color: #fff; }
+    #cart > button { width: 100%; background: #f39c12; color: #121212; font-weight: bold; margin-top: 10px; }
+
     footer {
       text-align: center;
       padding: 25px;
-      color: #777;
-      font-size: 13px;
+      color: #666;
+      font-size: 12px;
+      border-top: 1px solid #222;
+      margin-top: 40px;
     }
     @media (min-width: 650px) {
       .products { grid-template-columns: repeat(4, minmax(0, 1fr)); }
@@ -128,14 +190,16 @@
 <body>
   <header>
     <div class="top">
-      <div class="brand">🛍️ Olshop Kita</div>
-      <div>Belanja mudah, harga bersahabat!</div>
+      <div>
+        <div class="brand">🛡️ Shinn Store</div>
+        <div class="brand-sub">Premium Cheat & Game Store</div>
+      </div>
+      <div style="font-size: 13px; color: #aaa;">💬 24/7 Support</div>
     </div>
     <div class="search">
-      <input id="search" placeholder="Cari produk..." aria-label="Cari produk">
+      <input id="search" placeholder="Cari game atau produk..." aria-label="Cari produk">
       <button onclick="renderProducts()">Cari</button>
     </div>
-    <!-- Tombol Kategori -->
     <div class="categories" id="categoryContainer">
       <button class="cat-btn active" onclick="filterCategory('Semua', this)">Semua</button>
     </div>
@@ -143,25 +207,24 @@
 
   <main>
     <section class="banner">
-      <h1>Selamat Datang!</h1>
-      <p>Temukan produk favoritmu di Olshop Kita.</p>
-      <p>Promo menarik menantimu setiap hari.</p>
+      <h1>Sistem Otomatis 24 Jam</h1>
+      <p>Proses instan, aman, dan bergaransi tanpa menunggu admin.</p>
     </section>
 
-    <h2 class="section-title">✨ Produk Pilihan</h2>
+    <h2 class="section-title">🎮 Katalog Game & Produk</h2>
     <section class="products" id="products"></section>
 
     <section id="cart">
       <h2>🛒 Keranjang Belanja</h2>
       <div id="cartItems">Keranjang masih kosong.</div>
       <h3 id="total">Total: Rp0</h3>
-      <button onclick="checkout()">Lanjutkan Pesanan</button>
-      <p id="notice"></p>
+      <button onclick="checkout()">Lanjutkan Pesanan via WhatsApp</button>
+      <p id="notice" style="color: #f39c12; text-align: center; margin-top: 8px;"></p>
     </section>
   </main>
 
   <footer>
-    © 2026 Olshop Kita · Website toko online
+    © 2026 Shinn Store · All rights reserved.
   </footer>
 
   <!-- 1. Load Supabase -->
@@ -180,27 +243,26 @@
 
     async function fetchProducts() {
       try {
-        document.getElementById("products").innerHTML = "<p>Memuat produk dari database...</p>";
+        document.getElementById("products").innerHTML = "<p style='color:#888;'>Memuat katalog dari database...</p>";
 
         const { data, error } = await supabaseClient
           .from('products')
           .select('*');
           
         if (error) {
-          document.getElementById("products").innerHTML = `<p style="color:red;">Error Supabase: ${error.message}</p>`;
+          document.getElementById("products").innerHTML = `<p style="color:#d9534f;">Error Supabase: ${error.message}</p>`;
         } else {
           products = data || [];
           generateCategories();
           renderProducts();
         }
       } catch (err) {
-        document.getElementById("products").innerHTML = `<p style="color:red;">Error Sistem: ${err.message}</p>`;
+        document.getElementById("products").innerHTML = `<p style="color:#d9534f;">Error Sistem: ${err.message}</p>`;
       }
     }
 
     function generateCategories() {
       const container = document.getElementById("categoryContainer");
-      // Ambil kategori unik dari data produk
       const categories = ["Semua", ...new Set(products.map(p => p.category).filter(Boolean))];
       
       container.innerHTML = categories.map(cat => `
@@ -212,11 +274,8 @@
 
     function filterCategory(category, element) {
       selectedCategory = category;
-      
-      // Ubah tombol aktif
       document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
       element.classList.add('active');
-
       renderProducts();
     }
 
@@ -244,21 +303,23 @@
         filtered.length
           ? filtered.map(p => `
             <article class="card">
+              <div class="badge-platform">${p.category || 'GAME'}</div>
               <div class="picture">
                 ${p.image_url 
                   ? `<img src="${p.image_url}" style="width: 100%; height: 100%; object-fit: cover;" alt="Gambar Produk">` 
-                  : '📦'}
+                  : '🎮'}
               </div>
               <div class="info">
                 <div class="name">${p.name || 'Tanpa Nama'}</div>
+                <div class="price-label">Mulai dari</div>
                 <div class="price">${rupiah(p.price || 0)}</div>
                 <button onclick="addToCart(${p.id})">
-                  + Keranjang
+                  Pilih Paket
                 </button>
               </div>
             </article>
           `).join("")
-          : "<p>Produk tidak ditemukan dalam kategori ini.</p>";
+          : "<p style='color:#888;'>Produk tidak ditemukan.</p>";
     }
 
     function addToCart(id) {
@@ -278,8 +339,7 @@
       container.innerHTML = cart.length
         ? cart.map(p => `
           <p>
-            📦 ${p.name || 'Tanpa Nama'} × ${p.qty}
-            — ${rupiah((p.price || 0) * p.qty)}
+            <span>🎮 ${p.name || 'Tanpa Nama'} × ${p.qty} — <b>${rupiah((p.price || 0) * p.qty)}</b></span>
             <button onclick="removeItem(${p.id})">Hapus</button>
           </p>
         `).join("")
@@ -297,20 +357,20 @@
 
     function checkout() {
       if (cart.length === 0) {
-        document.getElementById("notice").textContent = "Silakan tambahkan produk ke keranjang dahulu.";
+        document.getElementById("notice").textContent = "Silakan pilih paket/produk ke keranjang dahulu.";
         return;
       }
 
-      const nomorAdmin = "6281234567890"; // Ganti dengan nomor WhatsApp kamu jika belum
+      const nomorAdmin = "6281234567890"; // Ganti dengan nomor WhatsApp kamu
 
-      let pesan = "Halo Kak, saya ingin memesan produk berikut:\n\n";
+      let pesan = "Halo Shinn Store, saya ingin memesan produk berikut:\n\n";
       
       cart.forEach(p => {
         pesan += `- ${p.name} (${p.qty}x) = ${rupiah(p.price * p.qty)}\n`;
       });
 
       const total = cart.reduce((sum, p) => sum + (p.price || 0) * p.qty, 0);
-      pesan += `\n*Total Belanja: ${rupiah(total)}*\n\nMohon informasi selanjutnya, terima kasih!`;
+      pesan += `\n*Total Pembayaran: ${rupiah(total)}*\n\nMohon instruksi selanjutnya, terima kasih!`;
 
       const urlWA = `https://wa.me/${nomorAdmin}?text=${encodeURIComponent(pesan)}`;
       window.open(urlWA, '_blank');
