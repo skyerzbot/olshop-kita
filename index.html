@@ -136,17 +136,27 @@
   </footer>
 
   <script>
-    const products = [
-      { id: 1, name: "Kaos Casual", price: 50000, icon: "👕" },
-      { id: 2, name: "Sepatu Keren", price: 125000, icon: "👟" },
-      { id: 3, name: "Tas Harian", price: 85000, icon: "🎒" },
-      { id: 4, name: "Jam Tangan", price: 75000, icon: "⌚" },
-      { id: 5, name: "Headphone", price: 99000, icon: "🎧" },
-      { id: 6, name: "Kacamata", price: 45000, icon: "🕶️" },
-      { id: 7, name: "Topi Casual", price: 35000, icon: "🧢" },
-      { id: 8, name: "Botol Minum", price: 25000, icon: "🧴" }
-    ];
+   
+// Variabel untuk menyimpan data dari Supabase
+let products = [];
 
+// Fungsi untuk mengambil data dari Supabase
+async function fetchProducts() {
+  const { data, error } = await supabase
+    .from('products')
+    .select('*');
+    
+  if (error) {
+    console.error("Error mengambil data:", error);
+  } else {
+    products = data;
+    renderProducts(); // Tampilkan produk setelah data diambil
+  }
+}
+
+// Panggil fungsi fetch saat halaman dimuat
+fetchProducts();
+    
     let cart = [];
 
     function rupiah(number) {
